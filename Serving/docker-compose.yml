@@ -1,0 +1,20 @@
+version: '3.8'  # Indique la version de Docker Compose
+
+networks:
+  prod_net:  # Définit le réseau "prod_net" pour la communication entre les services
+    driver: bridge
+
+services:
+  serving-api:  # Crée le service serving-api
+    container_name: serving_api
+    build:  # Indique l'emplacement du Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    volumes:  # Partage les dossiers data et artifacts avec l'API de serving
+      - ../Data:/Data
+      - ../Artifacts:/Artifacts
+      - ../Scripts:/Scripts
+    ports:  # Lie le port 8080 du conteneur au port 8080 de la machine hôte
+      - "8080:8080"
+    networks:  # Connecte le service au réseau prod_net
+      - prod_net

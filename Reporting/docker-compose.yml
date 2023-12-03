@@ -1,0 +1,15 @@
+version: '3.8'  # Indique la version de Docker Compose
+
+services:
+  reporting:
+    container_name: reporting  # Crée le service webapp
+    build:
+      context: .  # Indique le contexte actuel comme emplacement pour le build
+      dockerfile: Dockerfile  # Indique l’emplacement du Dockerfile
+
+    volumes : 
+      - ../Data:/Data
+      
+    ports:
+      - "8082:8082"  # Lie le port 8081 du conteneur au port 8081 de votre machine
+
